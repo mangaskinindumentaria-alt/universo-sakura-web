@@ -42,3 +42,45 @@
     padding: 35px 24px;
   }
 }
+
+/* CORRECCIÓN RESPONSIVE - SECCIÓN SOBRE MÍ */
+
+@media (max-width: 768px) {
+  .artist {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .artist-photo {
+    display: block;
+    width: 100%;
+    height: 380px;
+    min-height: 0;
+    max-height: 380px;
+    object-fit: cover;
+    object-position: center top;
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .artist-content {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 35px 22px;
+    overflow-wrap: break-word;
+  }
+
+  .artist-content h2 {
+    font-size: clamp(30px, 9vw, 42px);
+    line-height: 1.15;
+  }
+
+  .artist-content p {
+    font-size: 15px;
+    line-height: 1.8;
+  }
+}
