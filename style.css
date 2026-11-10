@@ -84,3 +84,34 @@
     line-height: 1.8;
   }
 }
+
+/* FORZAR VISIBILIDAD DE LA FOTO EN CELULARES */
+@media screen and (max-width: 768px) {
+  section.artist {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: stretch !important;
+    overflow: visible !important;
+    height: auto !important;
+  }
+
+  section.artist img.artist-photo {
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    position: relative !important;
+    width: 100% !important;
+    height: 350px !important;
+    min-height: 350px !important;
+    max-height: 350px !important;
+    object-fit: cover !important;
+    object-position: center 25% !important;
+    margin: 0 !important;
+  }
+
+  section.artist .artist-content {
+    display: block !important;
+    width: 100% !important;
+    box-sizing: border-box !important;
+  }
+}
