@@ -85,7 +85,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   const start = () => {
     stop();
     if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
-      timer = window.setInterval(() => move(1), 3800);
+      timer = window.setInterval(() => move(1), 5200);
     }
   };
 
