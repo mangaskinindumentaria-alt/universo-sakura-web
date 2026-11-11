@@ -119,18 +119,6 @@ document.getElementById("year").textContent = new Date().getFullYear();
    CARRUSEL 02 / VARIETE
 ================================= */
 
-
-/* ==========================================
-   CARRUSEL 02 / VARIETE
-   Mismo comportamiento que GALERIA
-========================================== */
-
-
-/* ==========================================
-   CARRUSEL 02 / VARIETÉ
-   Mismo funcionamiento que GALERÍA
-========================================== */
-
 (() => {
   const carousel = document.querySelector("#varieteCarousel");
   if (!carousel) return;
