@@ -688,3 +688,81 @@
     right: 10px;
   }
 }
+/* VARIETÉ: controles debajo y fuera de las imágenes */
+
+#ceramica .art-carousel {
+  overflow: visible;
+}
+
+#ceramica .variete-controls {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 22px;
+  margin-top: 28px;
+  width: 100%;
+}
+
+#ceramica .art-arrow {
+  position: static;
+  transform: none;
+  flex: 0 0 42px;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(230, 162, 189, .55);
+  border-radius: 50%;
+  background: rgba(9, 7, 10, .78);
+  color: #e6a2bd;
+  font-size: 18px;
+  cursor: pointer;
+  transition: all .3s ease;
+}
+
+#ceramica .art-arrow:hover {
+  background: #e6a2bd;
+  color: #09070a;
+  box-shadow: 0 0 18px rgba(230, 162, 189, .4);
+}
+
+#ceramica .art-dots {
+  position: static;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+}
+
+#ceramica .art-dot {
+  width: 22px;
+  height: 4px;
+  padding: 0;
+  border: none;
+  border-radius: 10px;
+  background: rgba(230, 162, 189, .35);
+  cursor: pointer;
+  transition: all .35s ease;
+}
+
+#ceramica .art-dot.active {
+  width: 38px;
+  background: #e6a2bd;
+  box-shadow: 0 0 9px rgba(230, 162, 189, .45);
+}
+
+@media (max-width: 600px) {
+  #ceramica .variete-controls {
+    gap: 14px;
+    margin-top: 22px;
+  }
+
+  #ceramica .art-arrow {
+    flex-basis: 36px;
+    width: 36px;
+    height: 36px;
+  }
+}
