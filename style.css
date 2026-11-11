@@ -23,3 +23,117 @@
   margin: 0;
 }
 
+
+
+/* SECCIÓN SOBRE MÍ — diseño adaptable */
+.artist {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+  align-items: stretch;
+  gap: clamp(28px, 5vw, 72px);
+  overflow: hidden;
+}
+
+.artist-photo-wrap {
+  position: relative;
+  min-height: 620px;
+  overflow: hidden;
+  border: 1px solid rgba(233, 162, 187, 0.35);
+  background: #171018;
+}
+
+.artist-photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 620px;
+  object-fit: cover;
+  object-position: center 30%;
+}
+
+.artist-content {
+  min-width: 0;
+  align-self: center;
+}
+
+.artist-content p {
+  max-width: 650px;
+  line-height: 1.85;
+  margin: 18px 0;
+}
+
+.artist-content .artist-signature {
+  margin-top: 28px;
+}
+
+@media (max-width: 900px) {
+  .artist {
+    grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.15fr);
+    gap: 28px;
+  }
+
+  .artist-photo-wrap,
+  .artist-photo {
+    min-height: 560px;
+  }
+}
+
+@media (max-width: 680px) {
+  .artist {
+    grid-template-columns: 1fr;
+    gap: 30px;
+    padding-top: 65px;
+    padding-bottom: 65px;
+  }
+
+  .artist-photo-wrap {
+    width: 100%;
+    min-height: 0;
+    height: clamp(340px, 115vw, 520px);
+  }
+
+  .artist-photo {
+    width: 100%;
+    height: 100%;
+    min-height: 0;
+    object-fit: cover;
+    object-position: center 28%;
+  }
+
+  .artist-content {
+    width: 100%;
+  }
+
+  .artist-content p {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+}
+
+
+/* Separación visual entre 03 / Sobre mí y 04 / Consultas */
+.artist {
+  position: relative;
+  background: linear-gradient(135deg, #100b10 0%, #171018 52%, #100b10 100%);
+  border-top: 1px solid rgba(233, 162, 187, 0.22);
+  border-bottom: 1px solid rgba(233, 162, 187, 0.28);
+  margin-bottom: 0;
+}
+
+.contact {
+  position: relative;
+  margin-top: 0;
+  padding-top: 110px;
+  border-top: 4px solid #09070a;
+}
+
+@media (max-width: 680px) {
+  .artist {
+    padding-top: 65px;
+    padding-bottom: 65px;
+  }
+
+  .contact {
+    padding-top: 80px;
+  }
+}
