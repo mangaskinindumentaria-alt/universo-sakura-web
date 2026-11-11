@@ -233,3 +233,116 @@
     aspect-ratio: 3 / 5.2;
   }
 }
+
+
+/* CARRUSEL DE OBRAS REALES — UNIVERSO SAKURA */
+.gallery-carousel {
+  position: relative;
+  width: 100%;
+}
+.gallery-viewport {
+  overflow: hidden;
+  width: 100%;
+  padding: 4px 2px 12px;
+}
+.gallery-track {
+  display: flex;
+  gap: 18px;
+  align-items: stretch;
+  transition: transform 650ms cubic-bezier(.22,.75,.25,1);
+  will-change: transform;
+}
+.art-slide {
+  flex: 0 0 calc((100% - 36px) / 3);
+  height: 430px;
+  overflow: hidden;
+  position: relative;
+  background: #171018;
+  border: 1px solid rgba(233,162,187,.3);
+  box-shadow: 0 12px 35px rgba(0,0,0,.22);
+}
+.art-slide::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border: 7px solid rgba(9,7,10,.08);
+  pointer-events: none;
+}
+.art-slide img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  background: #100c10;
+  transition: transform .65s ease, filter .65s ease;
+  filter: saturate(.9);
+}
+.art-slide:hover img {
+  transform: scale(1.035);
+  filter: saturate(1.05);
+}
+.gallery-controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 22px;
+}
+.gallery-arrow {
+  width: 42px;
+  height: 42px;
+  flex: 0 0 42px;
+  display: grid;
+  place-items: center;
+  border: 1px solid rgba(233,162,187,.65);
+  border-radius: 50%;
+  color: var(--pink-light);
+  background: #171018;
+  font: 300 28px/1 var(--sans);
+  cursor: pointer;
+  transition: background .2s, color .2s, transform .2s;
+}
+.gallery-arrow:hover {
+  background: var(--pink);
+  color: #1b0e15;
+  transform: scale(1.06);
+}
+.gallery-dots {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.gallery-dot {
+  width: 7px;
+  height: 7px;
+  padding: 0;
+  border: 0;
+  border-radius: 50px;
+  background: rgba(245,200,215,.35);
+  cursor: pointer;
+  transition: width .25s, background .25s;
+}
+.gallery-dot.is-active {
+  width: 22px;
+  background: var(--pink);
+}
+@media (max-width: 900px) {
+  .art-slide {
+    flex-basis: calc((100% - 18px) / 2);
+    height: 390px;
+  }
+}
+@media (max-width: 680px) {
+  .gallery-track { gap: 12px; }
+  .art-slide {
+    flex-basis: 100%;
+    height: min(112vw, 490px);
+  }
+  .gallery-controls { gap: 14px; margin-top: 16px; }
+  .gallery-arrow { width: 38px; height: 38px; flex-basis: 38px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .gallery-track { transition: none; }
+  .art-slide img, .gallery-arrow, .gallery-dot { transition: none; }
+}
