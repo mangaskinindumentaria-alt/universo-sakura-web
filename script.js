@@ -119,78 +119,104 @@ document.getElementById("year").textContent = new Date().getFullYear();
    CARRUSEL 02 / VARIETE
 ================================= */
 
+
+/* ==========================================
+   CARRUSEL 02 / VARIETE
+   Mismo comportamiento que GALERIA
+========================================== */
+
 (() => {
   const carousel = document.querySelector("#varieteCarousel");
 
   if (!carousel || carousel.dataset.initialized) return;
   carousel.dataset.initialized = "true";
 
-  const track = carousel.querySelector(".variete-track");
+  const track = carousel.querySelector(".art-track");
   const slides = Array.from(track.children);
-  const dotsContainer = carousel.querySelector(".variete-dots");
-  const prev = carousel.querySelector(".variete-prev");
-  const next = carousel.querySelector(".variete-next");
+  const prev = carousel.querySelector(".art-prev");
+  const next = carousel.querySelector(".art-next");
+  const dotsContainer = carousel.querySelector(".art-dots");
 
   let current = 0;
-  let timer;
-  let startX = 0;
+  let timer = null;
+  let visible = 3;
 
-  slides.forEach((slide, index) => {
-    const dot = document.createElement("button");
-    dot.className = "variete-dot";
-    dot.setAttribute("aria-label", `Ir a imagen ${index + 1}`);
+  function getVisible() {
+    if (window.innerWidth <= 600) return 1;
+    if (window.innerWidth <= 900) return 2;
+    return 3;
+  }
 
-    dot.addEventListener("click", () => {
-      goTo(index);
-      restart();
-    });
+  function getMaxIndex() {
+    return Math.max(0, slides.length - visible);
+  }
 
-    dotsContainer.appendChild(dot);
-  });
+  function createDots() {
+    dotsContainer.innerHTML = "";
 
-  const dots = Array.from(dotsContainer.children);
+    for (let i = 0; i <= getMaxIndex(); i++) {
+      const dot = document.createElement("button");
+
+      dot.className = "art-dot";
+      dot.setAttribute("aria-label", `Ir a posición ${i + 1}`);
+
+      dot.addEventListener("click", () => {
+        current = i;
+        update();
+        restart();
+      });
+
+      dotsContainer.appendChild(dot);
+    }
+  }
 
   function update() {
-    track.style.transform = `translateX(-${current * 100}%)`;
+    const slideWidth = 100 / visible;
+
+    track.style.transform =
+      `translateX(-${current * slideWidth}%)`;
+
+    const dots = dotsContainer.querySelectorAll(".art-dot");
 
     dots.forEach((dot, index) => {
       dot.classList.toggle("active", index === current);
     });
   }
 
-  function goTo(index) {
-    current = (index + slides.length) % slides.length;
+  function moveNext() {
+    current = current >= getMaxIndex() ? 0 : current + 1;
     update();
   }
 
-  function moveNext() {
-    goTo(current + 1);
-  }
-
   function movePrev() {
-    goTo(current - 1);
-  }
-
-  function start() {
-    stop();
-    timer = setInterval(moveNext, 5200);
+    current = current <= 0 ? getMaxIndex() : current - 1;
+    update();
   }
 
   function stop() {
     clearInterval(timer);
+    timer = null;
+  }
+
+  function start() {
+    stop();
+
+    if (getMaxIndex() === 0) return;
+
+    timer = setInterval(moveNext, 5200);
   }
 
   function restart() {
     start();
   }
 
-  next.addEventListener("click", () => {
-    moveNext();
+  prev.addEventListener("click", () => {
+    movePrev();
     restart();
   });
 
-  prev.addEventListener("click", () => {
-    movePrev();
+  next.addEventListener("click", () => {
+    moveNext();
     restart();
   });
 
@@ -200,23 +226,25 @@ document.getElementById("year").textContent = new Date().getFullYear();
   carousel.addEventListener("focusin", stop);
   carousel.addEventListener("focusout", start);
 
-  // Deslizamiento táctil en celulares
-  carousel.addEventListener("touchstart", (event) => {
-    startX = event.changedTouches[0].clientX;
-    stop();
-  }, { passive: true });
+  let resizeTimer;
 
-  carousel.addEventListener("touchend", (event) => {
-    const endX = event.changedTouches[0].clientX;
-    const difference = startX - endX;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimer);
 
-    if (Math.abs(difference) > 45) {
-      difference > 0 ? moveNext() : movePrev();
-    }
+    resizeTimer = setTimeout(() => {
+      visible = getVisible();
+      current = Math.min(current, getMaxIndex());
 
-    start();
-  }, { passive: true });
+      createDots();
+      update();
+      start();
+    }, 150);
+  });
 
+  visible = getVisible();
+  createDots();
   update();
   start();
+
 })();
+
