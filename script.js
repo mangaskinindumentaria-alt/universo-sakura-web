@@ -119,17 +119,20 @@ document.getElementById("year").textContent = new Date().getFullYear();
    CARRUSEL 02 / VARIETE
 ================================= */
 
+
+/* ==========================================
+   CARRUSEL 02 / VARIETÉ
+========================================== */
+
 (() => {
   const carousel = document.querySelector("#varieteCarousel");
   if (!carousel) return;
 
-  const track = carousel.querySelector(".art-track");
+  const track = carousel.querySelector(".gallery-track");
   const slides = Array.from(track.children);
-  const prev = carousel.querySelector(".art-prev");
-  const next = carousel.querySelector(".art-next");
-  const dotsWrap = carousel.querySelector(".art-dots");
-
-  if (!track || !slides.length || !prev || !next || !dotsWrap) return;
+  const prev = carousel.querySelector(".variete-prev");
+  const next = carousel.querySelector(".variete-next");
+  const dotsWrap = carousel.querySelector(".variete-dots");
 
   let index = 0;
   let timer = null;
@@ -149,13 +152,12 @@ document.getElementById("year").textContent = new Date().getFullYear();
     for (let i = 0; i <= maxIndex(); i++) {
       const dot = document.createElement("button");
       dot.type = "button";
-      dot.className = "art-dot";
-      dot.setAttribute("aria-label", `Ir al grupo de piezas ${i + 1}`);
+      dot.className = "gallery-dot";
 
       dot.addEventListener("click", () => {
         index = i;
         update();
-        restart();
+        start();
       });
 
       dotsWrap.appendChild(dot);
@@ -166,8 +168,8 @@ document.getElementById("year").textContent = new Date().getFullYear();
     visibleCount = getVisibleCount();
     index = Math.min(index, maxIndex());
 
-    const target = slides[index];
-    track.style.transform = `translateX(-${target.offsetLeft}px)`;
+    track.style.transform =
+      `translateX(-${slides[index].offsetLeft}px)`;
 
     Array.from(dotsWrap.children).forEach((dot, i) => {
       dot.classList.toggle("is-active", i === index);
@@ -185,7 +187,7 @@ document.getElementById("year").textContent = new Date().getFullYear();
   };
 
   const stop = () => {
-    if (timer) window.clearInterval(timer);
+    clearInterval(timer);
     timer = null;
   };
 
@@ -193,23 +195,21 @@ document.getElementById("year").textContent = new Date().getFullYear();
     stop();
 
     if (
-      !window.matchMedia("(prefers-reduced-motion: reduce)").matches &&
-      maxIndex() > 0
+      maxIndex() > 0 &&
+      !window.matchMedia("(prefers-reduced-motion: reduce)").matches
     ) {
-      timer = window.setInterval(() => move(1), 5200);
+      timer = setInterval(() => move(1), 5200);
     }
   };
 
-  const restart = () => start();
-
   prev.addEventListener("click", () => {
     move(-1);
-    restart();
+    start();
   });
 
   next.addEventListener("click", () => {
     move(1);
-    restart();
+    start();
   });
 
   carousel.addEventListener("mouseenter", stop);
@@ -220,9 +220,9 @@ document.getElementById("year").textContent = new Date().getFullYear();
   let resizeTimer;
 
   window.addEventListener("resize", () => {
-    window.clearTimeout(resizeTimer);
+    clearTimeout(resizeTimer);
 
-    resizeTimer = window.setTimeout(() => {
+    resizeTimer = setTimeout(() => {
       visibleCount = getVisibleCount();
       buildDots();
       update();
@@ -235,4 +235,5 @@ document.getElementById("year").textContent = new Date().getFullYear();
   update();
   start();
 })();
+
 
