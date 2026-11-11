@@ -217,3 +217,19 @@
     line-height: 1.45;
   }
 }
+
+
+/* Ajuste fino: foto más alta en celulares, manteniendo el diseño actual */
+@media (max-width: 680px) {
+  .artist-photo {
+    aspect-ratio: 3 / 5;
+    object-fit: cover;
+    object-position: center top;
+  }
+}
+
+@media (max-width: 380px) {
+  .artist-photo {
+    aspect-ratio: 3 / 5.2;
+  }
+}
