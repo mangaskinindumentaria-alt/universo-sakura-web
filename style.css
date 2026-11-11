@@ -550,10 +550,12 @@
   position: relative;
 }
 
+
 #ceramica .art-track {
   display: flex;
   transition: transform .7s cubic-bezier(.22,.75,.25,1);
 }
+
 
 #ceramica .art-slide {
   flex: 0 0 33.3333%;
