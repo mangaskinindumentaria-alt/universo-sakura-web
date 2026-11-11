@@ -346,3 +346,135 @@
   .gallery-track { transition: none; }
   .art-slide img, .gallery-arrow, .gallery-dot { transition: none; }
 }
+
+/* =================================
+   CARRUSEL 02 / VARIETE
+================================= */
+
+.ceramic-image {
+  overflow: hidden;
+  position: relative;
+}
+
+.variete-carousel {
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  position: relative;
+  overflow: hidden;
+  background: #100b10;
+}
+
+.variete-track {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  transition: transform .7s cubic-bezier(.22,.75,.25,1);
+}
+
+.variete-slide {
+  flex: 0 0 100%;
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  position: relative;
+}
+
+.variete-slide img {
+  width: 100%;
+  height: 100%;
+  min-height: 480px;
+  display: block;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* Flechas */
+
+.variete-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 5;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(255,255,255,.45);
+  border-radius: 50%;
+  background: rgba(10,8,12,.55);
+  color: #fff;
+  font-size: 17px;
+  cursor: pointer;
+  transition: .3s;
+}
+
+.variete-arrow:hover {
+  background: #d98ba9;
+  border-color: #d98ba9;
+}
+
+.variete-prev {
+  left: 18px;
+}
+
+.variete-next {
+  right: 18px;
+}
+
+/* Indicadores */
+
+.variete-dots {
+  position: absolute;
+  bottom: 20px;
+  left: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  gap: 9px;
+  z-index: 5;
+}
+
+.variete-dot {
+  width: 8px;
+  height: 8px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255,255,255,.45);
+  cursor: pointer;
+  transition: .3s;
+}
+
+.variete-dot.active {
+  width: 23px;
+  border-radius: 10px;
+  background: #e6a2bd;
+}
+
+/* Adaptación móvil */
+
+@media (max-width: 768px) {
+  .variete-carousel,
+  .variete-slide,
+  .variete-slide img {
+    min-height: 420px;
+  }
+
+  .variete-arrow {
+    width: 36px;
+    height: 36px;
+  }
+
+  .variete-prev {
+    left: 10px;
+  }
+
+  .variete-next {
+    right: 10px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .variete-track {
+    transition: none;
+  }
+}

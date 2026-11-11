@@ -114,3 +114,109 @@ document.getElementById("year").textContent = new Date().getFullYear();
   update();
   start();
 })();
+
+/* =================================
+   CARRUSEL 02 / VARIETE
+================================= */
+
+(() => {
+  const carousel = document.querySelector("#varieteCarousel");
+
+  if (!carousel || carousel.dataset.initialized) return;
+  carousel.dataset.initialized = "true";
+
+  const track = carousel.querySelector(".variete-track");
+  const slides = Array.from(track.children);
+  const dotsContainer = carousel.querySelector(".variete-dots");
+  const prev = carousel.querySelector(".variete-prev");
+  const next = carousel.querySelector(".variete-next");
+
+  let current = 0;
+  let timer;
+  let startX = 0;
+
+  slides.forEach((slide, index) => {
+    const dot = document.createElement("button");
+    dot.className = "variete-dot";
+    dot.setAttribute("aria-label", `Ir a imagen ${index + 1}`);
+
+    dot.addEventListener("click", () => {
+      goTo(index);
+      restart();
+    });
+
+    dotsContainer.appendChild(dot);
+  });
+
+  const dots = Array.from(dotsContainer.children);
+
+  function update() {
+    track.style.transform = `translateX(-${current * 100}%)`;
+
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === current);
+    });
+  }
+
+  function goTo(index) {
+    current = (index + slides.length) % slides.length;
+    update();
+  }
+
+  function moveNext() {
+    goTo(current + 1);
+  }
+
+  function movePrev() {
+    goTo(current - 1);
+  }
+
+  function start() {
+    stop();
+    timer = setInterval(moveNext, 5200);
+  }
+
+  function stop() {
+    clearInterval(timer);
+  }
+
+  function restart() {
+    start();
+  }
+
+  next.addEventListener("click", () => {
+    moveNext();
+    restart();
+  });
+
+  prev.addEventListener("click", () => {
+    movePrev();
+    restart();
+  });
+
+  carousel.addEventListener("mouseenter", stop);
+  carousel.addEventListener("mouseleave", start);
+
+  carousel.addEventListener("focusin", stop);
+  carousel.addEventListener("focusout", start);
+
+  // Deslizamiento táctil en celulares
+  carousel.addEventListener("touchstart", (event) => {
+    startX = event.changedTouches[0].clientX;
+    stop();
+  }, { passive: true });
+
+  carousel.addEventListener("touchend", (event) => {
+    const endX = event.changedTouches[0].clientX;
+    const difference = startX - endX;
+
+    if (Math.abs(difference) > 45) {
+      difference > 0 ? moveNext() : movePrev();
+    }
+
+    start();
+  }, { passive: true });
+
+  update();
+  start();
+})();
