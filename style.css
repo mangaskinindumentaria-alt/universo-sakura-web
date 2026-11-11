@@ -137,3 +137,83 @@
     padding-top: 80px;
   }
 }
+
+
+/* En celular: foto completa a la izquierda y texto a la derecha */
+@media (max-width: 680px) {
+  .artist {
+    display: grid;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
+    align-items: start;
+    gap: 13px;
+    padding: 42px 14px;
+  }
+
+  .artist-photo-wrap {
+    width: 100%;
+    min-height: 0;
+    height: auto;
+    align-self: start;
+    overflow: hidden;
+  }
+
+  .artist-photo {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-height: 0;
+    max-height: none;
+    aspect-ratio: 3 / 4;
+    object-fit: contain;
+    object-position: center top;
+    background: #09070a;
+  }
+
+  .artist-content {
+    width: 100%;
+    min-width: 0;
+    padding: 0;
+  }
+
+  .artist-content .section-kicker {
+    font-size: 8px;
+    line-height: 1.45;
+    letter-spacing: 0.08em;
+  }
+
+  .artist-content h2 {
+    font-size: clamp(18px, 4.8vw, 24px);
+    line-height: 1.12;
+    margin: 9px 0 12px;
+  }
+
+  .artist-content p {
+    font-size: clamp(9px, 2.5vw, 11px);
+    line-height: 1.5;
+    margin: 0 0 11px;
+    overflow-wrap: anywhere;
+  }
+
+  .artist-content .artist-signature {
+    font-size: 14px !important;
+    margin-top: 12px;
+  }
+}
+
+@media (max-width: 380px) {
+  .artist {
+    grid-template-columns: minmax(0, 0.78fr) minmax(0, 1.22fr);
+    gap: 9px;
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .artist-content h2 {
+    font-size: 18px;
+  }
+
+  .artist-content p {
+    font-size: 8.5px;
+    line-height: 1.45;
+  }
+}
